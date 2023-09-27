@@ -4,16 +4,21 @@
       <ion-row>
         <ion-col>
           <ion-label class="ion-text-center">
-            <span>
-              <h2>
-                Welcome Back ,
-                <ion-icon
-                  name="happy-outline"
-                  size="large"
-                  color="success"
-                ></ion-icon></h2
+            <span
+              style="
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: center;
+              "
+            >
+              <h2>Welcome Back ,</h2>
+              <ion-icon
+                name="happy-outline"
+                size="large"
+                color="success"
+              ></ion-icon
             ></span>
-
             <h1 style="font-weight: bold; font-size: 1.75rem">Sign in</h1>
           </ion-label>
         </ion-col>
@@ -21,7 +26,7 @@
       <form [formGroup]="loginForm" (ngSubmit)="userSignIn(loginForm)">
         <ion-row>
           <ion-col>
-            <ion-item className="ion-padding" lines="none" mode="ios">
+            <ion-item className="ion-padding" lines="none" fill="outline">
               <ion-icon name="mail-outline" />
               <ion-input
                 className="ion-margin-left"
@@ -33,13 +38,14 @@
                 formControlName="email"
                 name="email"
                 id="email"
+                mode="ios"
               />
             </ion-item>
           </ion-col>
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-item className="ion-padding" lines="none" mode="ios">
+            <ion-item className="ion-padding" lines="none" fill="outline">
               <ion-icon name="lock-closed-outline"></ion-icon>
               <ion-input
                 className="ion-margin-left"
@@ -51,16 +57,35 @@
                 formControlName="password"
                 name="password"
                 id="password"
+                mode="ios"
               />
             </ion-item>
           </ion-col>
         </ion-row>
         <ion-row className="ion-text-center ">
-          <ion-col size="8" offset="2" class="ion-margin">
-            <ion-button expand="block" color="warning" type="submit"> Login </ion-button>
+          <ion-col class="ion-margin">
+            <ion-button
+              expand="block"
+              color="dark"
+              fill="outline"
+              type="submit"
+              mode="ios"
+            >
+              Login <ion-spinner *ngIf="isLoading" color="dark" name="crescent"></ion-spinner
+            ></ion-button>
           </ion-col>
         </ion-row>
       </form>
     </ion-grid>
   </div>
 </ion-content>
+
+<ion-toast
+  [isOpen]="isToastOpen"
+  (didDismiss)="openToastHandler(false)"
+  message="{{toastMessage}}"
+  color="success"
+  duration="1500"
+  mode="ios"
+  position="top"
+/>
