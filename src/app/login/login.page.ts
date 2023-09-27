@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router:Router) { }
+  constructor(private formBuilder: FormBuilder, private authService: AuthService, private router: Router) { }
   loginForm = this.formBuilder.group({
     'email': [''],
     'password': ['']
@@ -30,10 +30,23 @@ export class LoginPage implements OnInit {
     this.authService.userSignIn(userData).subscribe({
       next: (res) => {
         setTimeout(() => {
-          this.isLoading = false
+
           this.isToastOpen = true
           this.toastMessage = 'Login Successful'
-          this.router.navigateByUrl('/home');
+
+           console.log(userData.email);
+
+          this.authService.getLoggedUserInformation({email: userData.email}).subscribe({
+            next: (userInformation: any) => {
+              this.authService.setUserLoggedIn(userInformation.user)
+              this.router.navigate(['/home'])
+              this.isLoading = false
+            },
+            error: (err) => {
+              console.log(err);
+            }
+          })
+
         }, 1500);
       },
       error: (err) => {

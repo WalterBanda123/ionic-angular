@@ -39,6 +39,7 @@
                 name="email"
                 id="email"
                 mode="ios"
+
               />
             </ion-item>
           </ion-col>
@@ -58,6 +59,7 @@
                 name="password"
                 id="password"
                 mode="ios"
+
               />
             </ion-item>
           </ion-col>
@@ -71,7 +73,12 @@
               type="submit"
               mode="ios"
             >
-              Login <ion-spinner *ngIf="isLoading" color="dark" name="crescent"></ion-spinner
+              Login
+              <ion-spinner
+                *ngIf="isLoading"
+                color="dark"
+                name="crescent"
+              ></ion-spinner
             ></ion-button>
           </ion-col>
         </ion-row>
